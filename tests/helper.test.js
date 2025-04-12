@@ -2,27 +2,50 @@ import { convertHoursToDays } from "../src/helper";
 
 describe("convertHoursToDays", () => {
   test.each([
-    ["16 hours", "2 days"],
-    ["191 hours", "24 days"],
-    ["248.458 hours", "31 days"],
-    ["what is 4 plus 4?", "0.5 days"],
-    ["Available 74 Hours", "9.5 days"],
-    ["Balance of 128", "16 days"],
-    ["1,548", "193.5 days"],
-    ["142568", "17821 days"],
-    ["1,42,568", "17821 days"],
-    ["No number here", null],
-    ["", null],
-    ["@#(*^$#", null],
-    ["....", null],
-    ["0 hours", "0 days"],
-    ["-8 hours", "0 days"],
-    ["1e3 hours", "0 days"],
-    ["1e-3 hours", "0 days"],
-    ["999999999999999999999 hours", "0 days"],
-    ["1000000000000000001 hours", "0 days"],
-  ])("should convert %s to %s", (input, expectedOutput) => {
+    { input: "16 hours", expectedHours: "16", expectedOutput: "2" },
+    { input: "191 hours", expectedHours: "191", expectedOutput: "24" },
+    { input: "248.458 hours", expectedHours: "248.458", expectedOutput: "31" },
+    { input: "what is 4 plus 4?", expectedHours: "4", expectedOutput: "0.5" },
+    { input: "Available 74 Hours", expectedHours: "74", expectedOutput: "9.5" },
+    { input: "Balance of 128", expectedHours: "128", expectedOutput: "16" },
+    { input: "1,548", expectedHours: "1548", expectedOutput: "193.5" },
+    { input: "142568", expectedHours: "142568", expectedOutput: "17821" },
+    { input: "1,42,568", expectedHours: "142568", expectedOutput: "17821" },
+    { input: "0 hours", expectedHours: "0", expectedOutput: "0" },
+    { input: "1e3 hours", expectedHours: "1", expectedOutput: "0" },
+    { input: "1e-3 hours", expectedHours: "1", expectedOutput: "0" },
+    {
+      input: `${Number.MAX_SAFE_INTEGER} hours`,
+      expectedHours: `${Number.MAX_SAFE_INTEGER}`,
+      expectedOutput: "1125899906842624",
+    },
+  ])(
+    "should convert $input to $expectedOutput days",
+    ({ input, expectedHours, expectedOutput }) => {
+      const output = convertHoursToDays(input);
+      expect(output).toBe(
+        `${expectedHours} hrs / 8 hrs a day = ${expectedOutput} days`
+      );
+    }
+  );
+
+  test.each([["No number here"], [""], ["@#(*^$#"], ["...."]])(
+    "should return validation message for %s",
+    (input) => {
+      var output = convertHoursToDays(input);
+      expect(output).toBe("Please select a number");
+    }
+  );
+
+  test.each([
+    ["-8 hours"],
+    ["999999999999999999999 hours"],
+    ["1000000000000000001 hours"],
+    [`${Number.MAX_SAFE_INTEGER + 1} hours`],
+  ])("should return range validation message for %s", (input) => {
     var output = convertHoursToDays(input);
-    expect(output).toBe(expectedOutput);
+    expect(output).toBe(
+      `Please select a number greater than 0 and less than ${Number.MAX_SAFE_INTEGER}`
+    );
   });
 });
