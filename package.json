@@ -1,7 +1,8 @@
 {
   "name": "hours-to-days-chrome-extension",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "npm run test -- --ci --watchAll=false"
   },
   "jest": {
     "transform": {

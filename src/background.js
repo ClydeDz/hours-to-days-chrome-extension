@@ -1,6 +1,7 @@
 import { convertHoursToDays } from "./helper.js";
 
 const CHROME_EXT_MENU_ID = "ConvertHoursToDaysMenuId";
+const DEFAULT_HOURS_PER_DAY = 8;
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -10,19 +11,30 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
+chrome.action.onClicked.addListener(() => {
+  chrome.runtime.openOptionsPage();
+});
+
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId !== CHROME_EXT_MENU_ID) return;
 
-  const days = convertHoursToDays(info.selectionText);
+  chrome.storage.sync.get(["hoursPerDay"], (result) => {
+    const hoursPerDay = result.hoursPerDay
+      ? result.hoursPerDay
+      : DEFAULT_HOURS_PER_DAY;
 
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: showTooltip,
-    args: [days],
-  });
-  chrome.scripting.insertCSS({
-    target: { tabId: tab.id },
-    files: ["background.css"],
+    const days = convertHoursToDays(info.selectionText, hoursPerDay);
+
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: showTooltip,
+      args: [days],
+    });
+
+    chrome.scripting.insertCSS({
+      target: { tabId: tab.id },
+      files: ["background.css"],
+    });
   });
 });
 
