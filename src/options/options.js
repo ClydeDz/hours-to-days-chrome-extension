@@ -1,27 +1,28 @@
 import {
   DEFAULT_HOURS_PER_DAY,
   DEFAULT_TOOLTIP_TIMEOUT,
+  STORAGE_KEYS,
 } from "../constants.js";
 
-const form = document.getElementById("options-form");
+const form = document.getElementById("hoursToDaysConfigForm");
 const hoursInput = document.getElementById("hours-per-day");
 const tooltipTimeoutInput = document.getElementById("tooltip-timeout");
 
-// Load saved value
 document.addEventListener("DOMContentLoaded", () => {
-  chrome.storage.sync.get(["hoursPerDay", "tooltipTimeout"], (result) => {
-    console.log(result);
-    hoursInput.value = result.hoursPerDay
-      ? result.hoursPerDay
-      : DEFAULT_HOURS_PER_DAY;
+  chrome.storage.sync.get(
+    [STORAGE_KEYS.HOURS_PER_DAY, STORAGE_KEYS.TOOLTIP_TIMEOUT],
+    (result) => {
+      hoursInput.value = result[STORAGE_KEYS.HOURS_PER_DAY]
+        ? result[STORAGE_KEYS.HOURS_PER_DAY]
+        : DEFAULT_HOURS_PER_DAY;
 
-    tooltipTimeoutInput.value = result.tooltipTimeout
-      ? result.tooltipTimeout
-      : DEFAULT_TOOLTIP_TIMEOUT;
-  });
+      tooltipTimeoutInput.value = result[STORAGE_KEYS.TOOLTIP_TIMEOUT]
+        ? result[STORAGE_KEYS.TOOLTIP_TIMEOUT]
+        : DEFAULT_TOOLTIP_TIMEOUT;
+    }
+  );
 });
 
-// Save value on form submit
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 

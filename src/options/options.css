@@ -76,11 +76,11 @@ input[type="number"]:focus-visible {
 
 button {
   background-color: var(--primary-color);
-  color: var(--secondary-color);
+  color: var(--text-color);
   border: 4px solid var(--border-color);
   border-radius: 8px;
   padding: 12px 24px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;

@@ -1,4 +1,9 @@
-import { DEFAULT_HOURS_PER_DAY, DEFAULT_TOOLTIP_TIMEOUT } from "./constants.js";
+import {
+  DEFAULT_HOURS_PER_DAY,
+  DEFAULT_TOOLTIP_MESSAGE,
+  DEFAULT_TOOLTIP_TIMEOUT,
+  STORAGE_KEYS,
+} from "./constants.js";
 import { convertHoursToDays } from "./helper.js";
 
 const CHROME_EXT_MENU_ID = "ConvertHoursToDaysMenuId";
@@ -18,44 +23,48 @@ chrome.action.onClicked.addListener(() => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId !== CHROME_EXT_MENU_ID) return;
 
-  chrome.storage.sync.get(["hoursPerDay", "tooltipTimeout"], (result) => {
-    const hoursPerDay = result.hoursPerDay
-      ? result.hoursPerDay
-      : DEFAULT_HOURS_PER_DAY;
+  chrome.storage.sync.get(
+    [STORAGE_KEYS.HOURS_PER_DAY, STORAGE_KEYS.TOOLTIP_TIMEOUT],
+    (result) => {
+      const hoursPerDay = result[STORAGE_KEYS.HOURS_PER_DAY]
+        ? result[STORAGE_KEYS.HOURS_PER_DAY]
+        : DEFAULT_HOURS_PER_DAY;
 
-    const tooltipTimeout = result.tooltipTimeout
-      ? result.tooltipTimeout
-      : DEFAULT_TOOLTIP_TIMEOUT;
+      const tooltipTimeout = result[STORAGE_KEYS.TOOLTIP_TIMEOUT]
+        ? result[STORAGE_KEYS.TOOLTIP_TIMEOUT]
+        : DEFAULT_TOOLTIP_TIMEOUT;
 
-    const days = convertHoursToDays(info.selectionText, hoursPerDay);
+      const tooltipMessage = convertHoursToDays(
+        info.selectionText,
+        hoursPerDay
+      );
 
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: showTooltip,
-      args: [days, tooltipTimeout],
-    });
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: showTooltip,
+        args: [tooltipMessage, tooltipTimeout],
+      });
 
-    chrome.scripting.insertCSS({
-      target: { tabId: tab.id },
-      files: ["background.css"],
-    });
-  });
+      chrome.scripting.insertCSS({
+        target: { tabId: tab.id },
+        files: ["background.css"],
+      });
+    }
+  );
 });
 
 function showTooltip(
-  daysTooltipTextMessage,
+  tooltipMessage = DEFAULT_TOOLTIP_MESSAGE,
   tooltipTimeout = DEFAULT_TOOLTIP_TIMEOUT
 ) {
-  if (!daysTooltipTextMessage) return;
+  const tooltipElementId = "ConvertHoursToDaysChromeExtTooltip";
+  const existingElement = document.getElementById(tooltipElementId);
 
-  const tooltipCssId = "ConvertHoursToDaysChromeExtTooltip";
-
-  const existing = document.getElementById(tooltipCssId);
-  if (existing) existing.remove();
+  if (existingElement) existingElement.remove();
 
   const tooltip = document.createElement("div");
-  tooltip.id = tooltipCssId;
-  tooltip.textContent = daysTooltipTextMessage;
+  tooltip.id = tooltipElementId;
+  tooltip.textContent = tooltipMessage;
 
   const topPosition =
     window.getSelection().getRangeAt(0).getBoundingClientRect().top < 35
@@ -75,8 +84,6 @@ function showTooltip(
   tooltip.style.left = `${leftPosition}px`;
 
   document.body.appendChild(tooltip);
-
-  console.log(tooltipTimeout);
 
   setTimeout(() => tooltip.remove(), tooltipTimeout * 1000);
 }

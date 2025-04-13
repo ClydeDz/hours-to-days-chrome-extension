@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Extension Options</title>
+    <title>Hours to Days Chrome Extension</title>
     <link rel="stylesheet" href="options.css" />
   </head>
   <body>
     <div class="container">
       <h1>Hours to Days</h1>
-      <form id="options-form">
+      <form id="hoursToDaysConfigForm">
         <label for="hours-per-day">Enter number of hours per day:</label>
         <input
           type="number"
@@ -24,6 +24,7 @@
           id="tooltip-timeout"
           name="tooltip-timeout"
           min="1"
+          max="10"
           required
         />
         <button type="submit" id="formSubmitBtn">Save</button>
