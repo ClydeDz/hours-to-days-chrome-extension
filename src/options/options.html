@@ -18,10 +18,23 @@
           min="1"
           required
         />
-        <button type="submit">Save</button>
-        <div class="options-form-success"><span>Saved successfully</span></div>
-        <div class="options-form-failure"><span>Failed to save</span></div>
+        <label for="tooltip-timeout">Tooltip timeout in seconds:</label>
+        <input
+          type="number"
+          id="tooltip-timeout"
+          name="tooltip-timeout"
+          min="1"
+          required
+        />
+        <button type="submit" id="formSubmitBtn">Save</button>
+        <div id="successToast" class="options-form-success">
+          <span>Saved successfully</span>
+        </div>
+        <div id="failureToast" class="options-form-failure">
+          <span>Failed to save</span>
+        </div>
       </form>
+      <div class="divider">&nbsp;●&nbsp;●&nbsp;●&nbsp;●&nbsp;</div>
       <footer>
         <a
           href="https://github.com/ClydeDz/hours-to-days-chrome-extension/blob/main/docs/README.md"

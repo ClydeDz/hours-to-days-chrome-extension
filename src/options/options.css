@@ -1,6 +1,5 @@
-/* options.css */
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Mega&display=swap");
 
-/* Color Variables#ff784e; ff5722 */
 :root {
   --background-color: #fffbf0;
   --primary-color: #ff5052;
@@ -12,8 +11,6 @@
   --success-color: #2fff2f;
   --failure-color: #ff4911;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Lexend+Mega&display=swap");
 
 /* General Styles */
 body {
@@ -46,7 +43,6 @@ h1 {
   font-weight: bold;
   color: var(--primary-color);
   margin-bottom: 15px;
-  text-transform: uppercase;
 }
 
 label {
@@ -54,6 +50,10 @@ label {
   font-weight: bold;
   display: block;
   margin-bottom: 10px;
+}
+
+.divider {
+  margin: 20px;
 }
 
 input[type="number"] {
@@ -65,6 +65,7 @@ input[type="number"] {
   width: 80%;
   box-shadow: 4px 4px 0 var(--shadow-color);
   margin-bottom: 20px;
+  font-family: "Lexend Mega", sans-serif;
 }
 
 input[type="number"]:focus-visible {
@@ -100,7 +101,6 @@ button:active {
 }
 
 footer {
-  margin-top: 20px;
   font-size: 0.9rem;
   color: var(--text-color);
 }
@@ -136,7 +136,7 @@ footer a:hover {
 .options-form-success {
   position: relative;
   overflow: hidden;
-  display: block;
+  display: none;
   padding: 10px 20px;
   color: black;
   background-color: white;
@@ -150,7 +150,7 @@ footer a:hover {
   font-weight: bold;
 }
 
-.options-form-success::before {
+.animate-success::before {
   content: "";
   position: absolute;
   top: 0;
@@ -165,7 +165,7 @@ footer a:hover {
 .options-form-failure {
   position: relative;
   overflow: hidden;
-  display: block;
+  display: none;
   padding: 10px 20px;
   color: black;
   background-color: white;
@@ -179,7 +179,7 @@ footer a:hover {
   font-weight: bold;
 }
 
-.options-form-failure::before {
+.animate-failure::before {
   content: "";
   position: absolute;
   top: 0;
