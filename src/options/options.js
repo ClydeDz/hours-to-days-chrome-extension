@@ -1,7 +1,7 @@
+import { DEFAULT_HOURS_PER_DAY } from "../constants.js";
+
 const form = document.getElementById("options-form");
 const hoursInput = document.getElementById("hours-per-day");
-
-const DEFAULT_HOURS_PER_DAY = 8;
 
 // Load saved value
 document.addEventListener("DOMContentLoaded", () => {

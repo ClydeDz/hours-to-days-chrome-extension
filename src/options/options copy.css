@@ -1,0 +1,208 @@
+/* options.css */
+
+/* Color Variables */
+:root {
+  --background-color: #fffbf0;
+  --primary-color: #ff5722;
+  --secondary-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #000000;
+  --hover-color: #ff784e;
+  --shadow-color: #000000;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Mega&display=swap");
+
+/* General Styles */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Lexend Mega", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: var(--secondary-color);
+  border: 4px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 8px 8px 0 var(--shadow-color);
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  background-color: var(--secondary-color);
+  border: 4px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  width: 80%;
+  box-shadow: 4px 4px 0 var(--shadow-color);
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: 4px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 8px 8px 0 var(--shadow-color);
+}
+
+button:hover {
+  background-color: var(--hover-color);
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 var(--shadow-color);
+}
+
+button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid var(--primary-color);
+  text-wrap-mode: nowrap;
+  line-height: 28px;
+}
+
+footer a:hover {
+  color: var(--hover-color);
+  border-bottom: 2px solid var(--hover-color);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.options-form-success {
+  display: block; /* Initially hidden */
+  background: linear-gradient(to left, #4caf50 100%, var(--secondary-color) 0%);
+  color: var(--secondary-color); /* White text for green background */
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: 4px solid var(--border-color); /* Thick black border */
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
+  margin-top: 20px;
+  text-align: center;
+  position: relative;
+  background-size: 200% 100%; /* Start with full green */
+  background-position: 0% 0%; /* Start fully green */
+  animation: drainBackground 3s linear forwards;
+}
+
+@keyframes drainBackground {
+  from {
+    background-position: 0% 0%; /* Full green background */
+    color: var(--secondary-color); /* White text */
+  }
+  to {
+    background-position: 100% 0%; /* Fully drained to white */
+    color: var(--text-color); /* Black text for white background */
+  }
+}
+
+.temp-options-form-success {
+  display: block; /* Initially hidden */
+  background-color: #4caf50; /* Green for success */
+  color: var(--secondary-color); /* White text */
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: 4px solid var(--border-color); /* Thick black border */
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.options-form-success {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  padding: 10px 20px;
+  color: black;
+  background-color: #4caf50;
+  border: 2px solid #4caf50;
+  cursor: pointer;
+  border: 4px solid var(--border-color); /* Thick black border */
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
+  margin: 0 auto;
+  width: 74%;
+}
+
+.options-form-success::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: white;
+  z-index: 0;
+  animation: fillButton 3s reverse forwards;
+}
+
+@keyframes fillButton {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.options-form-success span {
+  position: relative;
+  z-index: 1;
+}

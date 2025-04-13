@@ -1,0 +1,208 @@
+/* options.css */
+
+/* Color Variables#ff784e; ff5722 */
+:root {
+  --background-color: #fffbf0;
+  --primary-color: #ff5052;
+  --secondary-color: #ffffff;
+  --text-color: #000000;
+  --border-color: #000000;
+  --hover-color: #ff6063;
+  --shadow-color: #000000;
+  --success-color: #2fff2f;
+  --failure-color: #ff4911;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Mega&display=swap");
+
+/* General Styles */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Lexend Mega", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: var(--secondary-color);
+  border: 4px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 8px 8px 0 var(--shadow-color);
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  background-color: var(--secondary-color);
+  border: 4px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  width: 80%;
+  box-shadow: 4px 4px 0 var(--shadow-color);
+  margin-bottom: 20px;
+}
+
+input[type="number"]:focus-visible {
+  outline: none;
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--shadow-color);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: 4px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 8px 8px 0 var(--shadow-color);
+}
+
+button:hover,
+button:focus-visible {
+  outline: none;
+  background-color: var(--hover-color);
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 var(--shadow-color);
+}
+
+button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid var(--primary-color);
+  text-wrap-mode: nowrap;
+  line-height: 28px;
+}
+
+footer a:hover {
+  color: var(--hover-color);
+  border-bottom: 2px solid var(--hover-color);
+}
+
+.temp-options-form-success {
+  display: block; /* Initially hidden */
+  background-color: #4caf50; /* Green for success */
+  color: var(--secondary-color); /* White text */
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: 4px solid var(--border-color); /* Thick black border */
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
+  margin-top: 20px;
+  text-align: center;
+}
+
+.options-form-success {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  padding: 10px 20px;
+  color: black;
+  background-color: white;
+  border: 2px solid #4caf50;
+  cursor: pointer;
+  border: 4px solid var(--border-color); /* Thick black border */
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
+  margin: 0 auto;
+  width: 74%;
+  font-weight: bold;
+}
+
+.options-form-success::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: #2fff2f;
+  z-index: 0;
+  animation: fillButton 3.2s reverse forwards;
+}
+
+.options-form-failure {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  padding: 10px 20px;
+  color: black;
+  background-color: white;
+  border: 2px solid red;
+  cursor: pointer;
+  border: 4px solid var(--border-color); /* Thick black border */
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
+  margin: 0 auto;
+  width: 74%;
+  font-weight: bold;
+}
+
+.options-form-failure::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  color: black;
+  width: 0%;
+  background-color: #ff4911;
+  z-index: 0;
+  animation: fillButton 3.2s reverse forwards;
+}
+
+@keyframes fillButton {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.options-form-success span,
+.options-form-failure span {
+  position: relative;
+  z-index: 1;
+}

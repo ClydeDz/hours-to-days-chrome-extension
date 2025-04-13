@@ -1,7 +1,7 @@
+import { DEFAULT_HOURS_PER_DAY } from "./constants.js";
 import { convertHoursToDays } from "./helper.js";
 
 const CHROME_EXT_MENU_ID = "ConvertHoursToDaysMenuId";
-const DEFAULT_HOURS_PER_DAY = 8;
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({

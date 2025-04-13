@@ -4,44 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Extension Options</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-      h1 {
-        color: #333;
-      }
-      label {
-        display: block;
-        margin-top: 10px;
-      }
-      input[type="number"] {
-        margin-top: 5px;
-        padding: 5px;
-        width: 100px;
-      }
-      button {
-        margin-top: 10px;
-        padding: 5px 10px;
-        cursor: pointer;
-      }
-    </style>
+    <link rel="stylesheet" href="options.css" />
   </head>
   <body>
-    <h1>Hours to Days Extension</h1>
-    <form id="options-form">
-      <label for="hours-per-day">Enter number of hours per day:</label>
-      <input
-        type="number"
-        id="hours-per-day"
-        name="hours-per-day"
-        min="1"
-        required
-      />
-      <button type="submit">Save</button>
-    </form>
-
-    <script src="options.js"></script>
+    <div class="container">
+      <h1>Hours to Days</h1>
+      <form id="options-form">
+        <label for="hours-per-day">Enter number of hours per day:</label>
+        <input
+          type="number"
+          id="hours-per-day"
+          name="hours-per-day"
+          min="1"
+          required
+        />
+        <button type="submit">Save</button>
+        <div class="options-form-success"><span>Saved successfully</span></div>
+        <div class="options-form-failure"><span>Failed to save</span></div>
+      </form>
+      <footer>
+        <a
+          href="https://github.com/ClydeDz/hours-to-days-chrome-extension/blob/main/docs/README.md"
+          target="_blank"
+          rel="noreferrer"
+        >
+          About</a
+        >&nbsp;●&nbsp;
+        <a
+          href="https://github.com/ClydeDz/hours-to-days-chrome-extension/issues/new/choose"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Have an idea?</a
+        >&nbsp;●&nbsp;
+        <a
+          href="https://github.com/ClydeDz/hours-to-days-chrome-extension/issues/new/choose"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Report an issue</a
+        >&nbsp;●&nbsp;
+        <a
+          href="https://sponsor.clydedsouza.net/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Buy me a coffee</a
+        >&nbsp;●&nbsp; Developed by
+        <a href="https://clydedsouza.net" target="_blank" rel="noreferrer">
+          Clyde D'Souza
+        </a>
+      </footer>
+    </div>
+    <script type="module" src="options.js"></script>
   </body>
 </html>

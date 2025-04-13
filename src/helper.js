@@ -1,4 +1,4 @@
-const DEFAULT_HOURS_PER_DAY = 8;
+import { DEFAULT_HOURS_PER_DAY } from "./constants.js";
 
 export function convertHoursToDays(
   selectedText,
