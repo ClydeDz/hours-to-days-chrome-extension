@@ -10,30 +10,25 @@
     <div class="container">
       <h1>Hours to Days</h1>
       <form id="hoursToDaysConfigForm">
-        <label for="hours-per-day">Enter number of hours per day:</label>
+        <label for="hoursPerDayInput">Enter number of hours per day:</label>
         <input
           type="number"
-          id="hours-per-day"
-          name="hours-per-day"
+          id="hoursPerDayInput"
+          name="hoursPerDayInput"
           min="1"
           required
         />
-        <label for="tooltip-timeout">Tooltip timeout in seconds:</label>
+        <label for="tooltipTimeoutInput">Tooltip timeout in seconds:</label>
         <input
           type="number"
-          id="tooltip-timeout"
-          name="tooltip-timeout"
+          id="tooltipTimeoutInput"
+          name="tooltipTimeoutInput"
           min="1"
           max="10"
           required
         />
         <button type="submit" id="formSubmitBtn">Save</button>
-        <div id="successToast" class="options-form-success">
-          <span>Saved successfully</span>
-        </div>
-        <div id="failureToast" class="options-form-failure">
-          <span>Failed to save</span>
-        </div>
+        <div id="toastMessageContainer"></div>
       </form>
       <div class="divider">&nbsp;●&nbsp;●&nbsp;●&nbsp;●&nbsp;</div>
       <footer>
@@ -64,9 +59,9 @@
           rel="noreferrer"
         >
           Buy me a coffee</a
-        >&nbsp;●&nbsp; Developed by
+        >&nbsp;●&nbsp;
         <a href="https://clydedsouza.net" target="_blank" rel="noreferrer">
-          Clyde D'Souza
+          Developed by Clyde D'Souza
         </a>
       </footer>
     </div>

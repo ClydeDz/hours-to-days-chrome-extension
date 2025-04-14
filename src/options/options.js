@@ -4,15 +4,15 @@ import {
   STORAGE_KEYS,
 } from "../constants.js";
 
-const form = document.getElementById("hoursToDaysConfigForm");
-const hoursInput = document.getElementById("hours-per-day");
-const tooltipTimeoutInput = document.getElementById("tooltip-timeout");
+const hoursToDaysConfigForm = document.getElementById("hoursToDaysConfigForm");
+const hoursPerDayInput = document.getElementById("hoursPerDayInput");
+const tooltipTimeoutInput = document.getElementById("tooltipTimeoutInput");
 
 document.addEventListener("DOMContentLoaded", () => {
   chrome.storage.sync.get(
     [STORAGE_KEYS.HOURS_PER_DAY, STORAGE_KEYS.TOOLTIP_TIMEOUT],
     (result) => {
-      hoursInput.value = result[STORAGE_KEYS.HOURS_PER_DAY]
+      hoursPerDayInput.value = result[STORAGE_KEYS.HOURS_PER_DAY]
         ? result[STORAGE_KEYS.HOURS_PER_DAY]
         : DEFAULT_HOURS_PER_DAY;
 
@@ -23,11 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 });
 
-form.addEventListener("submit", (event) => {
+hoursToDaysConfigForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const hoursPerDay = hoursInput.value
-    ? hoursInput.value
+  const hoursPerDay = hoursPerDayInput.value
+    ? hoursPerDayInput.value
     : DEFAULT_HOURS_PER_DAY;
 
   const tooltipTimeout = tooltipTimeoutInput.value
@@ -36,61 +36,46 @@ form.addEventListener("submit", (event) => {
 
   chrome.storage.sync.set({ hoursPerDay, tooltipTimeout }, () => {
     console.log(hoursPerDay, tooltipTimeout);
-    if (!chrome.runtime.lastError) {
-      triggerSuccessAnimation();
+    if (chrome.runtime.lastError) {
+      showToastMessage("failure");
       return;
     }
-
-    triggerFailureAnimation();
+    
+    showToastMessage("success");
   });
 });
 
-function triggerSuccessAnimation() {
-  const successToast = document.getElementById("successToast");
+function showToastMessage(type = "success") {
   const formSubmitBtn = document.getElementById("formSubmitBtn");
-
-  successToast.style.display = "block";
   formSubmitBtn.style.display = "none";
 
-  // Select the success message element
-  const successMessage = document.querySelector(".options-form-success");
+  const toastMessageContainer = document.getElementById(
+    "toastMessageContainer"
+  );
 
-  // Reset the animation by removing the class (if it exists)
-  successMessage.classList.remove("animate-success");
+  while (toastMessageContainer.firstChild) {
+    toastMessageContainer.removeChild(toastMessageContainer.firstChild);
+  }
 
-  // Force reflow to restart the animation
-  void successMessage.offsetWidth;
+  const toastMessage = document.createElement("div");
+  toastMessage.className = `toast-message toast-${type}`;
+  toastMessage.id = "toastMessage";
 
-  // Add the animation class
-  successMessage.classList.add("animate-success");
+  const toastMessageContents = document.createElement("span");
+  toastMessageContents.innerText =
+    type === "success" ? "Saved successfully" : "Failed to save";
 
-  setTimeout(() => {
-    successToast.style.display = "none";
-    formSubmitBtn.style.display = "inline-block";
-  }, 3000);
-}
+  toastMessage.appendChild(toastMessageContents);
 
-function triggerFailureAnimation() {
-  const failureToast = document.getElementById("failureToast");
-  const formSubmitBtn = document.getElementById("formSubmitBtn");
-
-  failureToast.style.display = "block";
-  formSubmitBtn.style.display = "none";
-
-  // Select the success message element
-  const failureMessage = document.querySelector(".options-form-failure");
-
-  // Reset the animation by removing the class (if it exists)
-  failureMessage.classList.remove("animate-failure");
-
-  // Force reflow to restart the animation
-  void failureMessage.offsetWidth;
-
-  // Add the animation class
-  failureMessage.classList.add("animate-failure");
+  toastMessageContainer.style.display = "block";
+  toastMessageContainer.appendChild(toastMessage);
 
   setTimeout(() => {
-    failureToast.style.display = "none";
+    toastMessageContainer.style.display = "none";
     formSubmitBtn.style.display = "inline-block";
+
+    while (toastMessageContainer.firstChild) {
+      toastMessageContainer.removeChild(toastMessageContainer.firstChild);
+    }
   }, 3000);
 }

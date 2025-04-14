@@ -6,7 +6,7 @@
   --secondary-color: #ffffff;
   --text-color: #000000;
   --border-color: #000000;
-  --hover-color: #ff6063;
+  --hover-color: #fe383c;
   --shadow-color: #000000;
   --success-color: #2fff2f;
   --failure-color: #ff4911;
@@ -53,7 +53,7 @@ label {
 }
 
 .divider {
-  margin: 20px;
+  margin: 26px 0 20px 0;
 }
 
 input[type="number"] {
@@ -85,6 +85,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 8px 8px 0 var(--shadow-color);
+  margin-top: 10px;
 }
 
 button:hover,
@@ -110,99 +111,68 @@ footer a {
   text-decoration: none;
   font-weight: bold;
   border-bottom: 2px solid var(--primary-color);
-  text-wrap-mode: nowrap;
   line-height: 28px;
+  text-wrap-mode: nowrap;
+  transition: border-bottom-style 1s;
 }
 
 footer a:hover {
   color: var(--hover-color);
   border-bottom: 2px solid var(--hover-color);
+  border-bottom-style: dashed;
 }
 
-.temp-options-form-success {
-  display: block; /* Initially hidden */
-  background-color: #4caf50; /* Green for success */
-  color: var(--secondary-color); /* White text */
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 10px 20px;
-  border: 4px solid var(--border-color); /* Thick black border */
-  border-radius: 8px;
-  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
-  margin-top: 20px;
-  text-align: center;
+/* TOAST MESSAGE STYLES */
+
+#toastMessageContainer {
+  display: none;
 }
 
-.options-form-success {
+.toast-message {
   position: relative;
   overflow: hidden;
-  display: none;
   padding: 10px 20px;
-  color: black;
-  background-color: white;
-  border: 2px solid #4caf50;
-  cursor: pointer;
-  border: 4px solid var(--border-color); /* Thick black border */
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  border: 4px solid var(--border-color);
   border-radius: 8px;
-  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
+  box-shadow: 8px 8px 0 var(--shadow-color);
   margin: 0 auto;
   width: 74%;
   font-weight: bold;
 }
 
-.animate-success::before {
+.toast-message span {
+  position: relative;
+  z-index: 1;
+}
+
+.toast-success::before,
+.toast-failure::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 0%;
-  background-color: #2fff2f;
   z-index: 0;
-  animation: fillButton 3.2s reverse forwards;
+  animation: drainWidthAnimation 3.05s reverse forwards;
+  color: var(--text-color);
 }
 
-.options-form-failure {
-  position: relative;
-  overflow: hidden;
-  display: none;
-  padding: 10px 20px;
-  color: black;
-  background-color: white;
-  border: 2px solid red;
-  cursor: pointer;
-  border: 4px solid var(--border-color); /* Thick black border */
-  border-radius: 8px;
-  box-shadow: 8px 8px 0 var(--shadow-color); /* Hard offset shadow */
-  margin: 0 auto;
-  width: 74%;
-  font-weight: bold;
+.toast-success::before {
+  background-color: var(--success-color);
 }
 
-.animate-failure::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  color: black;
-  width: 0%;
-  background-color: #ff4911;
-  z-index: 0;
-  animation: fillButton 3.2s reverse forwards;
+.toast-failure::before {
+  background-color: var(--failure-color);
 }
 
-@keyframes fillButton {
+@keyframes drainWidthAnimation {
   from {
     width: 0%;
   }
   to {
     width: 100%;
   }
-}
-
-.options-form-success span,
-.options-form-failure span {
-  position: relative;
-  z-index: 1;
 }
