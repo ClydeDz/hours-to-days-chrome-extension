@@ -22,7 +22,6 @@
   },
   "permissions": [
     "contextMenus",
-    "notifications",
     "scripting",
     "activeTab",
     "storage"
