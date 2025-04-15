@@ -29,6 +29,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check if manifest json version has been updated
+        id: manifest-version-check
+        uses: EndBug/version-check@v2.1.5
+        with:
+          file-name: ./src/manifest.json
+
+      - name: Fail if manifest json version is not updated
+        if: ${{ steps.manifest-version-check.outputs.changed == 'false' }}
+        run: |
+          echo The manifest.json version was not updated. Please update the version and try again.
+          exit 1
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
