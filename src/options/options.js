@@ -35,12 +35,11 @@ hoursToDaysConfigForm.addEventListener("submit", (event) => {
     : DEFAULT_TOOLTIP_TIMEOUT;
 
   chrome.storage.sync.set({ hoursPerDay, tooltipTimeout }, () => {
-    console.log(hoursPerDay, tooltipTimeout);
     if (chrome.runtime.lastError) {
       showToastMessage("failure");
       return;
     }
-    
+
     showToastMessage("success");
   });
 });
