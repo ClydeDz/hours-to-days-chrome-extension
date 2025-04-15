@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Hours to Days",
-  "description": "A simple Chrome Extension created using a template",
+  "description": "Convert hours to days by selecting text in a webpage.",
   "version": "0.0.1",
   "author": "Clyde D'Souza",
   "icons": {
@@ -18,7 +18,7 @@
     "open_in_tab": true
   },
   "action": {
-    "default_title": "Open Hours to Days Options"
+    "default_title": "Open Hours to Days configuration page"
   },
   "permissions": [
     "contextMenus",
