@@ -35,6 +35,15 @@ jobs:
         with:
           file-name: ./src/manifest.json
 
+      - name: Create or update comment if manifest json version is not updated
+        uses: peter-evans/create-or-update-comment@v3
+        if: ${{ steps.manifest-version-check.outputs.changed == 'false' }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ⚠️ The manifest.json version was not updated. Please update the version and try again.
+
       - name: Fail if manifest json version is not updated
         if: ${{ steps.manifest-version-check.outputs.changed == 'false' }}
         run: |
