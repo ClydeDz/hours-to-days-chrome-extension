@@ -73,7 +73,7 @@ function showTooltip(
         5
       : window.getSelection().getRangeAt(0).getBoundingClientRect().top +
         window.scrollY -
-        32;
+        50;
 
   tooltip.style.top = `${topPosition}px`;
 
