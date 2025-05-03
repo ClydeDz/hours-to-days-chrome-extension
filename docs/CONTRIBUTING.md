@@ -21,7 +21,7 @@ In other words, the pull request process. When you're ready with your changes, o
 
 - Think of how you can tackle a piece of work in the smallest unit possible. A small unit, in this case, would be something that adds value even though the changes are small. Small changes are easier to review, hence the request to think small where possible.
 - Ensure you've added or updated unit tests. Would your unit test fail if someone was to accidentally modify your code?
-- Update the version number in the [manifest.json file](https://github.com/ClydeDz/hours-to-days-chrome-extension/blob/main/src/manifest.json#L5) and [package.json file](https://github.com/ClydeDz/hours-to-days-chrome-extension/blob/main/package.json#L3). We're following the [Semver guide](https://semver.org/), so please check the website to see which number you'd need to increment.
+- Update the version number in the [manifest.json file](https://github.com/ClydeDz/hours-to-days-chrome-extension/blob/main/src/manifest.json#L5). We're following the [Semver guide](https://semver.org/), so please check the website to see which number you'd need to increment.
 - As a result of your changes, if you need to make changes to screenshots or description of the extension, please let me know in the description of your pull request and we can review your updated copy together. Updating this in the Chrome web store is currently a manual process.
 
 **Note:** Even after a successful build and deployment, the extension still remains in draft/unpublished state in the Chrome developer site. I need to manually submit a version for review which then eventually published the extension.

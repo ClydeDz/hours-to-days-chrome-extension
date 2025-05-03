@@ -34,6 +34,7 @@ jobs:
         uses: EndBug/version-check@v2.1.5
         with:
           file-name: ./src/manifest.json
+          diff-search: true
 
       - name: Create or update comment if manifest json version is not updated
         uses: peter-evans/create-or-update-comment@v3
@@ -100,11 +101,11 @@ jobs:
         with:
           args: zip -qq -r extension.zip src
 
-      # - name: Publish to Chrome store
-      #   uses: Klemensas/chrome-extension-upload-action@v1.3
-      #   with:
-      #     refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-      #     client-id: ${{ secrets.CHROME_CLIENT_ID }}
-      #     client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-      #     app-id: ${{ secrets.CHROME_APP_ID }}
-      #     file-name: "./extension.zip"
+      - name: Publish to Chrome store
+        uses: Klemensas/chrome-extension-upload-action@v1.3
+        with:
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          app-id: ${{ secrets.CHROME_APP_ID }}
+          file-name: "./extension.zip"

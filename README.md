@@ -8,6 +8,8 @@ No worries anymore. With the help of this extension, when you see a value displa
 
 By default, the number of hours per day is set to 8 (in line with most corporate working hours). And by default, the tooltip message will show up for 3 seconds. If you need to change any of these values, you can customize it in the Options page of this extension. Just click on the Hours to Days extension from the top-right extensions group.
 
+Please note, it will work on most websites but it will not work on PDFs.
+
 ## Credits
 
 Developed by [Clyde D'Souza](https://clydedsouza.net/) Please consider [buying me a coffee](https://sponsor.clydedsouza.net/) to support my development endeavors.

@@ -13,6 +13,7 @@ chrome.runtime.onInstalled.addListener(() => {
     id: CHROME_EXT_MENU_ID,
     title: "Convert hours to days",
     contexts: ["selection"],
+    documentUrlPatterns: ["https://*/*", "http://*/*", "file://*/*"],
   });
 });
 
@@ -22,6 +23,8 @@ chrome.action.onClicked.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId !== CHROME_EXT_MENU_ID) return;
+
+  if (tab.id === -1) return;
 
   chrome.storage.sync.get(
     [STORAGE_KEYS.HOURS_PER_DAY, STORAGE_KEYS.TOOLTIP_TIMEOUT],
@@ -73,7 +76,7 @@ function showTooltip(
         5
       : window.getSelection().getRangeAt(0).getBoundingClientRect().top +
         window.scrollY -
-        32;
+        50;
 
   tooltip.style.top = `${topPosition}px`;
 
