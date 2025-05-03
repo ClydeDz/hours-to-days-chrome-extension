@@ -34,6 +34,7 @@ jobs:
         uses: EndBug/version-check@v2.1.5
         with:
           file-name: ./src/manifest.json
+          diff-search: true
 
       - name: Create or update comment if manifest json version is not updated
         uses: peter-evans/create-or-update-comment@v3
